@@ -29,7 +29,7 @@ user.setAttribute("id","user");
 let head=document.createElement("h1");
 head.setAttribute("type","text");
 head.setAttribute("id","head");
-head.innerHTML=`Search for the nationality based on the name.`
+head.innerHTML=`Search for the nationality based on the name`
 formgroup.append(head,user);
 //descripton
 let des=document.createElement("p");
