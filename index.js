@@ -29,7 +29,7 @@ user.setAttribute("id","user");
 let head=document.createElement("h1");
 head.setAttribute("type","text");
 head.setAttribute("id","head");
-head.innerHTML=`Search for the nationality based on the name`
+head.innerHTML=`Search for the nationality based on the name.`
 formgroup.append(head,user);
 //descripton
 let des=document.createElement("p");
@@ -71,53 +71,33 @@ var count =0;
 try {
 let name=document.getElementById("main").value.toLowerCase();;
 console.log(name);
-let res= await fetch("https://api.nationalize.io/?name[]=michael&name[]=matthew&name[]=jane");
+let res= await fetch(`https://api.nationalize.io?name=${name}`);
 let result=await res.json();
 //functions
-result.filter(search)
-
-function search(num,index,arr)
+result.country.filter(search)
+if(name==="")
 {
-
-  user.innerHTML=`Your Currently Searching Name ${name}`;
-  if(arr[index].name==name)
-   {
-      
-    count++;
-    for(let i=0;i<arr[index].country.length;i++)
-    {
-      if(i<2)
-      {
-        let tbody_tr=document.createElement("tr");
+  alert("Please Enter Valid Input")
+}
+ function search(num,index,arr)
+{
+ 
+  if(count<2)
+  {
+    let tbody_tr=document.createElement("tr");
         tbody.append(tbody_tr);
           let c=document.createElement("td");
           c.setAttribute("class","text-center");
-          c.innerHTML=arr[index].country[i].country_id;
+          c.innerHTML=num.country_id;
           tbody_tr.append(c);
          
           let p=document.createElement("td");
           p.setAttribute("class","text-center");
-          p.innerHTML=arr[index].country[i].probability;
+          p.innerHTML=num.probability;
           tbody_tr.append(p);
-         
-      }
-    }
   }
-}
-if(count==0)
-{
-  let tbody_tr=document.createElement("tr");
-        tbody.append(tbody_tr);
-          let c=document.createElement("img");
-          c.setAttribute("class","text-center");
-          c.setAttribute("src","sad.png");
-          tbody_tr.append(c);
-         
-          let p=document.createElement("td");
-          p.setAttribute("class","text-center");
-          p.innerHTML=`sorry data not found`;
-          tbody_tr.append(p);
-   
+  count++
+ 
 }
 }
 catch (error) {
